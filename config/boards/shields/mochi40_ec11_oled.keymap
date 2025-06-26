@@ -62,4 +62,3 @@
     >;
     encoder_2_button_binding = <&kp BACKLIGHT_TOGGLE>; // Nhấn bật/tắt đèn nền (nếu có)
 };
-
