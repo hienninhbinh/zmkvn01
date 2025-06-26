@@ -1,0 +1,64 @@
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer { /* Layer 0: Default */
+            bindings = <
+                &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P    &kp BSPC
+                &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SCLN &kp QUOT
+                &mo 1   &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA &kp DOT  &kp FSLH
+                &kp LCTRL &kp LGUI &kp LALT &kp SPC &kp RET &mo 2
+            >;
+        };
+
+        layer_1 { /* Layer 1: Numbers & Symbols (khi giữ &mo 1) */
+            bindings = <
+                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &kp DEL
+                &kp EXCL &kp AT &kp HASH &kp DLLR &kp PERC &kp CIRC &kp AMPR &kp ASTR &kp LPRN &kp RPRN &kp PIPE
+                &trans  &kp HOME &kp PGUP &kp PGDN &kp END &kp MINUS &kp EQUAL &kp LBRC &kp RBRC &kp BSLH &kp PLUS
+                &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_2 { /* Layer 2: Arrows & Function Keys (khi giữ &mo 2) */
+            bindings = <
+                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11
+                &trans  &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &kp CAPS &kp F12 &bt BT_CLR
+            >;
+        };
+    };
+
+    // Định nghĩa chức năng của Encoder trên các layer
+    // Các encoder được định nghĩa trong file .overlay sẽ được ZMK tự động nhận diện
+    // Các encoder trong keymap này chỉ định chức năng cho chúng
+    // Bạn có thể mở rộng nếu có nhiều encoder
+    encoder_0_encoder: encoder_0 {
+        label = "Encoder on Layer 0";
+        // Tham chiếu đến encoder đã định nghĩa trong overlay
+        // Bắt buộc phải có nếu bạn muốn sử dụng encoder
+    };
+
+    // Chức năng của encoder trên từng layer (sử dụng nodes trong device tree)
+    // Lớp 0
+    encoder_0_bindings = <
+        &inc_dec_kp_K_VOLU_K_VOLD // Quay tăng/giảm âm lượng
+    >;
+    encoder_0_button_binding = <&kp K_MUTE>; // Nhấn để tắt/bật tiếng
+
+    // Lớp 1
+    encoder_1_bindings = <
+        &inc_dec_kp_PG_UP_PG_DN // Quay cuộn trang lên/xuống
+    >;
+    encoder_1_button_binding = <&kp PRINTSCREEN>; // Nhấn để chụp màn hình
+
+    // Lớp 2
+    encoder_2_bindings = <
+        &inc_dec_kp_BRIGHTNESS_UP_BRIGHTNESS_DOWN // Quay tăng/giảm độ sáng
+    >;
+    encoder_2_button_binding = <&kp BACKLIGHT_TOGGLE>; // Nhấn bật/tắt đèn nền (nếu có)
+};
