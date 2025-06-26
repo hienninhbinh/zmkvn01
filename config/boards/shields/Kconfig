@@ -1,2 +1,0 @@
-config SHIELD_MOCHI40_EC11_OLED
-    def_bool y
