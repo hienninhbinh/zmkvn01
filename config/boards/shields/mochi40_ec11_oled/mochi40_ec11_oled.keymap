@@ -62,3 +62,4 @@
     >;
     encoder_2_button_binding = <&kp BACKLIGHT_TOGGLE>; // Nhấn bật/tắt đèn nền (nếu có)
 };
+Add Mochi40 EC11 OLED shield config and keymap
